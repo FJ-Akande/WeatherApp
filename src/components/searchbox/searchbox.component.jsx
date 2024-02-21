@@ -1,51 +1,41 @@
 import React, { useEffect, useState } from "react";
-// import SearchIcon from "@mui/icons-material/Search";
-import getWeather from "../../weather";
 
-const SearchBox = ({ units }) => {
+const SearchBox = ({ units, setSearchedLocation }) => {
   const [query, setQuery] = useState("");
 
-  const handleCitySearch = (event) => {
-    setQuery(event.target.value);
-    // setTimeout(() => {
-    //   handleSearch(value);
-    // }, 300);
+  const fetchLocationData = async () => {
+    const geoLocationUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=1&language=en&format=json`;
+    const geoLocationData = await fetch(geoLocationUrl);
+    const response = await geoLocationData.json();
+    console.log(response);
+    if (response.results && response.results.length > 0) {
+      const { latitude, longitude, country } = response.results[0];
+      setSearchedLocation({
+        searchLat: latitude,
+        searchLong: longitude,
+        searchedLocation: country,
+      });
+    } else {
+      console.error("No result found");
+    }
   };
 
-  // Function to handle user search
   useEffect(() => {
-    const handleSearch = async (query) => {
-      // Call the geocoding service to get latitude and longitude
-      const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
-        query
-      )}&key=AIzaSyCtXQpaYxqLXENvxMp8lgodk3i-wsNixdM`;
+    const delayDebounceFn = setTimeout(() => {
+      fetchLocationData();
+    }, 3000);
 
-      try {
-        const response = await fetch(geocodeUrl);
-        const data = await response.json();
-        console.log(data);
-        // const { lat, lng } = data.results[0].geometry.location;
+    return () => clearTimeout(delayDebounceFn);
+  }, [query]);
 
-        // Fetch weather data based on latitude and longitude
-        // const weatherData = await getWeather(lat, lng, units);
-
-        // Display weather information to the user
-        // console.log(weatherData);
-      } catch (error) {
-        console.error("Error processing search:", error);
-      }
-    };
-    handleSearch("London");
-  }, [query, units]);
   return (
     <div>
       <input
         type="text"
         placeholder="Search city..."
         value={query}
-        onChange={handleCitySearch}
+        onChange={(event) => setQuery(event.target.value)}
       />
-      {/* <SearchIcon /> */}
     </div>
   );
 };
