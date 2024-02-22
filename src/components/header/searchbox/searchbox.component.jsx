@@ -9,11 +9,11 @@ const SearchBox = ({ units, setSearchedLocation }) => {
     const response = await geoLocationData.json();
     console.log(response);
     if (response.results && response.results.length > 0) {
-      const { latitude, longitude, country } = response.results[0];
+      const { latitude, longitude, name } = response.results[0];
       setSearchedLocation({
         searchLat: latitude,
         searchLong: longitude,
-        searchedLocation: country,
+        searchedRadar: name,
       });
     } else {
       console.error("No result found");

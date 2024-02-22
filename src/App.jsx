@@ -1,86 +1,91 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import getWeather from "./weather";
-import SearchBox from "./components/searchbox/SearchBox.component";
+import useGeolocation from "./useGeolocation";
+import Header from "./components/header/header.component";
+import CurrentWeather from "./components/current-weather/current-weather.component";
 
 const App = () => {
   const [units, setUnits] = useState("fahrenheit");
-  const [locationAvail, setLocationAvail] = useState(null);
-  const [defaultLocation, setDefaultLocation] = useState({
-    latitude: null,
-    longitude: null,
-    data: null,
-  });
-  const [searchedLocation, setSearchedLocation] = useState({
-    searchLat: "",
-    searchLong: "",
-    searchedLocation: "",
-    data: null,
-  });
+  const { location, city, locationAvailable } = useGeolocation();
+  const [defaultLocation, setDefaultLocation] = useState(null);
+  const [searchedLocation, setSearchedLocation] = useState(null);
 
   useEffect(() => {
-    const fetchLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          setDefaultLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-          setLocationAvail(true);
-        });
-      } else {
-        setLocationAvail(false);
-      }
-    };
-    fetchLocation();
-  }, []);
+    if (location) {
+      setDefaultLocation(location);
+    }
+  }, [location]);
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await getWeather(
-        defaultLocation.latitude,
-        defaultLocation.longitude,
-        units
-      );
-      setDefaultLocation((prev) => ({
-        ...prev,
-        data,
-      }));
-    };
-    getData();
-  }, [defaultLocation.latitude, defaultLocation.longitude, units]);
+    if (defaultLocation) {
+      const getData = async () => {
+        try {
+          const data = await getWeather(
+            defaultLocation.latitude,
+            defaultLocation.longitude,
+            units
+          );
+          setDefaultLocation((prev) => ({
+            ...prev,
+            data,
+          }));
+        } catch (error) {
+          console.error("Error fetching default weather data:", error);
+        }
+      };
+      getData();
+    }
+  }, [defaultLocation, units]);
 
   useEffect(() => {
-    if (searchedLocation.searchLat && searchedLocation.searchLong) {
+    if (
+      searchedLocation &&
+      searchedLocation.latitude &&
+      searchedLocation.longitude
+    ) {
       const getMainLocationData = async () => {
-        const searchData = await getWeather(
-          searchedLocation.searchLat,
-          searchedLocation.searchLong,
-          units
-        );
-        setSearchedLocation((prev) => ({
-          ...prev,
-          searchData,
-        }));
-        console.log(searchData);
+        try {
+          const data = await getWeather(
+            searchedLocation.latitude,
+            searchedLocation.longitude,
+            units
+          );
+          setSearchedLocation((prev) => ({
+            ...prev,
+            data,
+          }));
+        } catch (error) {
+          console.error("Error fetching searched weather data:", error);
+        }
       };
       getMainLocationData();
     }
-  }, [searchedLocation.searchLat, searchedLocation.searchLong, units]);
+  }, [searchedLocation, units]);
 
-  if (!locationAvail) {
+  if (locationAvailable === null) {
+    return <h2>Checking location availability...</h2>;
+  }
+
+  if (!locationAvailable) {
     return <h2>Location Unavailable; allow browser to access location</h2>;
   }
 
-  if (!defaultLocation.data) {
-    return <h2>Loading...</h2>;
+  if (!defaultLocation || !defaultLocation.data) {
+    return <h2>Loading default weather data...</h2>;
   }
+
+  // const { searchedRadar } = searchedLocation;
 
   return (
     <div>
-      <SearchBox units={units} setSearchedLocation={setSearchedLocation} />
-      <p>Weather App</p>
-      <p>{defaultLocation.data.current.temperature_2m}</p>
+      <Header
+        units={units}
+        setUnits={setUnits}
+        setDefaultLocation={setDefaultLocation}
+        setSearchedLocation={setSearchedLocation}
+      />
+      <CurrentWeather searchedLocation={searchedLocation} city={city} />
     </div>
   );
 };
