@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     if (defaultLocation) {
-      const getData = async () => {
+      const fetchDefaultLocationData = async () => {
         try {
           const data = await getWeather(
             defaultLocation.latitude,
@@ -34,7 +34,7 @@ const App = () => {
           console.error("Error fetching default weather data:", error);
         }
       };
-      getData();
+      fetchDefaultLocationData();
     }
   }, [defaultLocation, units]);
 
