@@ -7,7 +7,7 @@ const SearchBox = ({ units, setSearchedLocation }) => {
     const geoLocationUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=1&language=en&format=json`;
     const geoLocationData = await fetch(geoLocationUrl);
     const response = await geoLocationData.json();
-    console.log(response);
+    // console.log(response);
     if (response.results && response.results.length > 0) {
       const { latitude, longitude, name } = response.results[0];
       setSearchedLocation({
@@ -15,8 +15,6 @@ const SearchBox = ({ units, setSearchedLocation }) => {
         searchLong: longitude,
         searchedRadar: name,
       });
-    } else {
-      console.error("No result found");
     }
   };
 

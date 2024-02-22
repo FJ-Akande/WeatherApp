@@ -41,25 +41,26 @@ const App = () => {
   useEffect(() => {
     if (
       searchedLocation &&
-      searchedLocation.latitude &&
-      searchedLocation.longitude
+      searchedLocation.searchLat &&
+      searchedLocation.searchLong
     ) {
-      const getMainLocationData = async () => {
+      const fetchSearchedLocationData = async () => {
         try {
           const data = await getWeather(
-            searchedLocation.latitude,
-            searchedLocation.longitude,
+            searchedLocation.searchLat,
+            searchedLocation.searchLong,
             units
           );
-          setSearchedLocation((prev) => ({
-            ...prev,
-            data,
-          }));
+          setDefaultLocation({
+            latitude: searchedLocation.searchLat,
+            longitude: searchedLocation.searchLong,
+            data: data,
+          });
         } catch (error) {
           console.error("Error fetching searched weather data:", error);
         }
       };
-      getMainLocationData();
+      fetchSearchedLocationData();
     }
   }, [searchedLocation, units]);
 
@@ -74,8 +75,6 @@ const App = () => {
   if (!defaultLocation || !defaultLocation.data) {
     return <h2>Loading default weather data...</h2>;
   }
-
-  // const { searchedRadar } = searchedLocation;
 
   return (
     <div>

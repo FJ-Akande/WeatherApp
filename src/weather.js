@@ -7,8 +7,12 @@ const getWeather = async (latitude, longitude, units) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      const data = await response.json();
-      return data;
+      const { current, hourly, daily } = await response.json();
+      return {
+        current,
+        hourly,
+        daily,
+      };
     } catch (error) {
       console.error("Error fetching weather data:", error);
       return null;
