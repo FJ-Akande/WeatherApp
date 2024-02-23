@@ -19,22 +19,16 @@ const App = () => {
 
   useEffect(() => {
     if (defaultLocation) {
-      const fetchDefaultLocationData = async () => {
-        try {
-          const data = await getWeather(
-            defaultLocation.latitude,
-            defaultLocation.longitude,
-            units
-          );
+      getWeather(defaultLocation.latitude, defaultLocation.longitude, units)
+        .then((data) => {
           setDefaultLocation((prev) => ({
             ...prev,
             data,
           }));
-        } catch (error) {
+        })
+        .catch((error) => {
           console.error("Error fetching default weather data:", error);
-        }
-      };
-      fetchDefaultLocationData();
+        });
     }
   }, [defaultLocation, units]);
 
@@ -44,21 +38,23 @@ const App = () => {
       searchedLocation.searchLat &&
       searchedLocation.searchLong
     ) {
-      const fetchSearchedLocationData = async () => {
-        try {
-          const data = await getWeather(
-            searchedLocation.searchLat,
-            searchedLocation.searchLong,
-            units
-          );
-          setDefaultLocation({
-            latitude: searchedLocation.searchLat,
-            longitude: searchedLocation.searchLong,
-            data: data,
+      const fetchSearchedLocationData = () => {
+        getWeather(
+          searchedLocation.searchLat,
+          searchedLocation.searchLong,
+          units
+        )
+          .then((data) => {
+            setDefaultLocation({
+              latitude: searchedLocation.searchLat,
+              longitude: searchedLocation.searchLong,
+              data: data,
+            });
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching searched weather data:", error);
           });
-        } catch (error) {
-          console.error("Error fetching searched weather data:", error);
-        }
       };
       fetchSearchedLocationData();
     }
