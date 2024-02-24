@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import getWeather from "./weather";
-import useGeolocation from "./useGeolocation";
+import getWeather from "./utils/weather";
+import useGeolocation from "./hooks/useGeolocation";
 import Header from "./components/header/header.component";
 import CurrentWeather from "./components/current-weather/current-weather.component";
 

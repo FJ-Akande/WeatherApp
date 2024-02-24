@@ -29,6 +29,7 @@ const parseCurrentWeather = (data) => {
     temperature: data.current.temperature_2m,
     apparentTemperature: data.current.apparent_temperature,
     precipitation: data.current.precipitation,
+    windSpeed: data.current.wind_speed_10m,
   };
   return currentWeather;
 };
