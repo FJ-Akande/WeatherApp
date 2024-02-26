@@ -48,6 +48,7 @@ const App = () => {
             setDefaultLocation({
               latitude: searchedLocation.searchLat,
               longitude: searchedLocation.searchLong,
+              city: searchedLocation.searchedRadar,
               data: data,
             });
             console.log(data);
@@ -65,11 +66,16 @@ const App = () => {
   }
 
   if (!locationAvailable) {
-    return <h2>Location Unavailable; allow browser to access location</h2>;
+    return (
+      <h2>
+        There was an error getting your location. Please allow us to use your
+        location and refresh the page.
+      </h2>
+    );
   }
 
   if (!defaultLocation || !defaultLocation.data) {
-    return <h2>Loading default weather data...</h2>;
+    return <h2>Loading weather data...</h2>;
   }
 
   return (
@@ -80,7 +86,7 @@ const App = () => {
         setDefaultLocation={setDefaultLocation}
         setSearchedLocation={setSearchedLocation}
       />
-      <CurrentWeather searchedLocation={searchedLocation} city={city} />
+      <CurrentWeather defaultLocation={defaultLocation} />
     </div>
   );
 };

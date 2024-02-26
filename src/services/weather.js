@@ -17,7 +17,7 @@ const getWeather = (latitude, longitude, units) => {
         };
       })
       .catch((error) => {
-        console.error("Error fetching weather data:", error);
+        console.error("Error fetching weather data:", error.message);
         return null;
       });
   }
@@ -31,13 +31,14 @@ const parseCurrentWeather = (data) => {
     precipitation: Math.round(data.current.precipitation * 100) / 100,
     windSpeed: data.current.wind_speed_10m,
     day: data.current.is_day,
+    weatherCode: data.current.weather_code,
   };
   return currentWeather;
 };
 
 //Parsing function for hourly weather data
 const parseHourlyWeather = ({ hourly: hourlyData }) => {
-  const currentTime = Math.floor(Date.now() / 1000);
+  const currentTime = Math.floor(Date.now() * 1000);
 
   let currentIndex = hourlyData.time.findIndex((time) => time >= currentTime);
 
@@ -53,8 +54,8 @@ const parseHourlyWeather = ({ hourly: hourlyData }) => {
   ) {
     parsedHourlyWeather.push({
       time: hourlyData.time[i],
-      temperature: hourlyData.temperature_2m[i],
-      weatherCode: hourlyData.weather_code[i],
+      temperature: Math.round(hourlyData.temperature_2m[i]),
+      weatherCode: Math.round(hourlyData.weather_code[i]),
     });
   }
 

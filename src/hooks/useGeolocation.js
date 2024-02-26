@@ -24,6 +24,7 @@ const useGeolocation = () => {
               setLocation({
                 latitude,
                 longitude,
+                city,
               });
               setCity(city);
               setLocationAvailable(true);
