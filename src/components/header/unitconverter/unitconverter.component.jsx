@@ -1,5 +1,5 @@
 import React from "react";
-import getWeather from "../../../utils/weather";
+import getWeather from "../../../services/weather";
 
 const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {
   //Come back to these:
