@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useDebounce from "../../../hooks/debounce-hook";
+import useDebounce from "../../../hooks/debounce/debounce.hooks";
 
 const SearchBox = ({ units, setSearchedLocation }) => {
   const [query, setQuery] = useState("");

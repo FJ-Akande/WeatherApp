@@ -1,5 +1,8 @@
 import React from "react";
-import { ICON_MAP } from "../utils/iconMap";
+import { useMemo } from "react";
+import { ICON_MAP } from "../utils/iconmap/iconMap.utils";
+// import "../../assets/icons"
+// import "../../assets/weather-icons"
 
 const CurrentWeather = ({ defaultLocation }) => {
   if (!defaultLocation) {
@@ -9,8 +12,11 @@ const CurrentWeather = ({ defaultLocation }) => {
   const {
     current: { temperature, precipitation, weatherCode },
   } = data;
-  const iconFileName = ICON_MAP.get(weatherCode);
-  const iconPath = iconFileName ? `../assets/icons/${iconFileName}.svg` : null;
+  // const iconFileName = ICON_MAP.get(weatherCode);
+  const iconFileName = useMemo(() => ICON_MAP.get(weatherCode), [weatherCode]);
+  const iconPath = iconFileName
+    ? `../../assets/weather-icons/${iconFileName}.svg`
+    : null;
 
   return (
     <>
