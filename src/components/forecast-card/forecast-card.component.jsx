@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ICON_MAP } from "../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
 import cloudIcon from "../../assets/weather-icons/cloud.svg";
@@ -8,13 +8,15 @@ import cloudSunIcon from "../../assets/weather-icons/cloud-sun.svg";
 import smogIcon from "../../assets/weather-icons/smog.svg";
 import snowFlakeIcon from "../../assets/weather-icons/snowflake.svg";
 
-const CurrentWeather = ({ defaultLocation, weatherData }) => {
+const ForecastCard = ({ weatherData: { hourly } }) => {
   const [iconFileName, setIconFileName] = useState("");
   const [iconPath, setIconPath] = useState("");
-  const { city } = defaultLocation;
-  const {
-    current: { temperature, precipitation, weatherCode },
-  } = weatherData;
+
+  const { weatherCode } = hourly;
+
+  const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
+    hour: "numeric",
+  });
 
   useEffect(() => {
     if (weatherCode) {
@@ -48,26 +50,19 @@ const CurrentWeather = ({ defaultLocation, weatherData }) => {
     }
   }, [weatherCode]);
 
-  if (!defaultLocation && !weatherData) {
-    return <p>Loading...</p>;
-  }
-
   return (
-    <>
-      <div className="current-weather-container">
-        <div className="current-container">
-          <div>
-            <h2>{city}</h2>
-            <p>Chance of rain: {precipitation}%</p>
-            <h1>{temperature}&deg;</h1>
-            {iconPath && (
-              <img src={iconPath} alt="Weather Icon" className="icon-img" />
-            )}
-          </div>
+    <div>
+      {hourly.map((hour) => (
+        <div key={hour}>
+          <h4>{HOUR_FORMATTER.format(hour.time)}</h4>
+          {iconPath && (
+            <img src={iconPath} alt="Weather Icon" className="icon-img" />
+          )}
+          <h2>{hour.temperature}</h2>
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 
-export default CurrentWeather;
+export default ForecastCard;

@@ -4,11 +4,13 @@ import getWeather from "./services/weather/weather.services";
 import useGeolocation from "./hooks/geolocation/useGeolocation.hooks";
 import Header from "./components/header/header.component";
 import CurrentWeather from "./components/current-weather/current-weather.component";
+import HourlyForecast from "./components/hourly-forecast/hourly-forecast.component";
 
 const App = () => {
   const [units, setUnits] = useState("fahrenheit");
   const { location, city, locationAvailable } = useGeolocation();
   const [defaultLocation, setDefaultLocation] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState(null);
 
   useEffect(() => {
@@ -21,10 +23,7 @@ const App = () => {
     if (defaultLocation) {
       getWeather(defaultLocation.latitude, defaultLocation.longitude, units)
         .then((data) => {
-          setDefaultLocation((prev) => ({
-            ...prev,
-            data,
-          }));
+          setWeatherData(data);
         })
         .catch((error) => {
           console.error("Error fetching default weather data:", error);
@@ -38,26 +37,19 @@ const App = () => {
       searchedLocation.searchLat &&
       searchedLocation.searchLong
     ) {
-      const fetchSearchedLocationData = () => {
-        getWeather(
-          searchedLocation.searchLat,
-          searchedLocation.searchLong,
-          units
-        )
-          .then((data) => {
-            setDefaultLocation({
-              latitude: searchedLocation.searchLat,
-              longitude: searchedLocation.searchLong,
-              city: searchedLocation.searchedRadar,
-              data: data,
-            });
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error("Error fetching searched weather data:", error);
+      getWeather(searchedLocation.searchLat, searchedLocation.searchLong, units)
+        .then((data) => {
+          setDefaultLocation({
+            latitude: searchedLocation.searchLat,
+            longitude: searchedLocation.searchLong,
+            city: searchedLocation.searchedRadar,
           });
-      };
-      fetchSearchedLocationData();
+          setWeatherData(data);
+          console.log("changed from fetching searched location data");
+        })
+        .catch((error) => {
+          console.error("Error fetching searched weather data:", error);
+        });
     }
   }, [searchedLocation, units]);
 
@@ -74,7 +66,7 @@ const App = () => {
     );
   }
 
-  if (!defaultLocation || !defaultLocation.data) {
+  if (!weatherData) {
     return <h2>Loading weather data...</h2>;
   }
 
@@ -86,7 +78,11 @@ const App = () => {
         setDefaultLocation={setDefaultLocation}
         setSearchedLocation={setSearchedLocation}
       />
-      <CurrentWeather defaultLocation={defaultLocation} />
+      <CurrentWeather
+        defaultLocation={defaultLocation}
+        weatherData={weatherData}
+      />
+      <HourlyForecast weatherData={weatherData} />
     </div>
   );
 };
