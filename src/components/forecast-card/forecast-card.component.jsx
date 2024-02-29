@@ -9,55 +9,43 @@ import smogIcon from "../../assets/weather-icons/smog.svg";
 import snowFlakeIcon from "../../assets/weather-icons/snowflake.svg";
 
 const ForecastCard = ({ weatherData: { hourly } }) => {
-  const [iconFileName, setIconFileName] = useState("");
-  const [iconPath, setIconPath] = useState("");
-
-  const { weatherCode } = hourly;
-  console.log(hourly);
-
   const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
     hour: "numeric",
   });
 
-  useEffect(() => {
-    if (weatherCode) {
-      const iconName = ICON_MAP.get(weatherCode);
-      setIconFileName(iconName);
-      switch (iconName) {
-        case "sun":
-          setIconPath(sunIcon);
-          break;
-        case "cloud-bolt":
-          setIconPath(cloudBoltIcon);
-          break;
-        case "cloud-showers-heavy":
-          setIconPath(cloudShowersIcon);
-          break;
-        case "cloud":
-          setIconPath(cloudIcon);
-          break;
-        case "cloud-sun":
-          setIconPath(cloudSunIcon);
-          break;
-        case "smog":
-          setIconPath(smogIcon);
-          break;
-        case "snowflake":
-          setIconPath(snowFlakeIcon);
-          break;
-        default:
-          setIconPath("");
-      }
+  const getIconPath = (weatherCode) => {
+    const iconName = ICON_MAP.get(weatherCode);
+    switch (iconName) {
+      case "sun":
+        return sunIcon;
+      case "cloud-bolt":
+        return cloudBoltIcon;
+      case "cloud-showers-heavy":
+        return cloudShowersIcon;
+      case "cloud":
+        return cloudIcon;
+      case "cloud-sun":
+        return cloudSunIcon;
+      case "smog":
+        return smogIcon;
+      case "snowflake":
+        return snowFlakeIcon;
+      default:
+        return "";
     }
-  }, [weatherCode]);
+  };
 
   return (
     <div>
       {hourly.map((hour, index) => (
         <div key={index}>
-          <h4>{HOUR_FORMATTER.format(hour.time)}</h4>
-          {iconPath && (
-            <img src={iconPath} alt="Weather Icon" className="icon-img" />
+          <h4>{HOUR_FORMATTER.format(hour.timestamp)}</h4>
+          {getIconPath(hour.weatherCode) && (
+            <img
+              src={getIconPath(hour.weatherCode)}
+              alt="Weather Icon"
+              className="icon-img"
+            />
           )}
           <h2>{hour.temperature}</h2>
         </div>
