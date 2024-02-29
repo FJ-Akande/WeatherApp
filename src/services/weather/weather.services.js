@@ -26,6 +26,7 @@ const getWeather = (latitude, longitude, units) => {
 // Parsing function for current weather data
 const parseCurrentWeather = (data) => {
   const currentWeather = {
+    currentTime: data.current.time,
     temperature: Math.round(data.current.temperature_2m),
     apparentTemperature: Math.round(data.current.apparent_temperature),
     precipitation: Math.round(data.current.precipitation * 100) / 100,
@@ -37,29 +38,35 @@ const parseCurrentWeather = (data) => {
 };
 
 //Parsing function for hourly weather data
-const parseHourlyWeather = ({ hourly: hourlyData }) => {
-  const currentTime = Math.floor(Date.now() * 1000);
+const parseHourlyWeather = ({ hourly: hourlyData, current }) => {
+  const hourlyWeather = hourlyData.time
+    .map((time, index) => ({
+      timestamp: time * 1000,
+      temperature: Math.round(hourlyData.temperature_2m[index]),
+      weatherCode: Math.round(hourlyData.weather_code[index]),
+    }))
+    .filter(({ timestamp }) => timestamp >= current.time * 1000);
 
-  let currentIndex = hourlyData.time.findIndex((time) => time >= currentTime);
+  const fifteenHourlyData = [];
+  const currentTime = current.time * 1000;
 
-  if (currentIndex === -1) {
-    currentIndex = 0;
-  }
-
-  const parsedHourlyWeather = [];
   for (
-    let i = currentIndex;
-    i < currentIndex + 16 && i < hourlyData.time.length;
+    let i = 0;
+    i < hourlyWeather.length && fifteenHourlyData.length < 6;
     i += 3
   ) {
-    parsedHourlyWeather.push({
-      time: hourlyData.time[i],
-      temperature: Math.round(hourlyData.temperature_2m[i]),
-      weatherCode: Math.round(hourlyData.weather_code[i]),
-    });
+    const { timestamp, temperature, weatherCode } = hourlyWeather[i];
+
+    // Calculate the timestamp for the next 15 hours with a 3-hour difference
+    const nextTimestamp = currentTime + (i + 1) * 3 * 60 * 60 * 1000;
+
+    // Check if the current timestamp is within the next 15 hours with a 3-hour difference
+    if (timestamp < nextTimestamp) {
+      fifteenHourlyData.push({ timestamp, temperature, weatherCode });
+    }
   }
 
-  return parsedHourlyWeather;
+  return fifteenHourlyData;
 };
 
 // Parsing function for daily weather data

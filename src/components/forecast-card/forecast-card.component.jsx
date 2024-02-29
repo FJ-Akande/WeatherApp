@@ -13,6 +13,7 @@ const ForecastCard = ({ weatherData: { hourly } }) => {
   const [iconPath, setIconPath] = useState("");
 
   const { weatherCode } = hourly;
+  console.log(hourly);
 
   const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
     hour: "numeric",
@@ -52,8 +53,8 @@ const ForecastCard = ({ weatherData: { hourly } }) => {
 
   return (
     <div>
-      {hourly.map((hour) => (
-        <div key={hour}>
+      {hourly.map((hour, index) => (
+        <div key={index}>
           <h4>{HOUR_FORMATTER.format(hour.time)}</h4>
           {iconPath && (
             <img src={iconPath} alt="Weather Icon" className="icon-img" />
