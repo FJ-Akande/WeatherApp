@@ -5,6 +5,7 @@ import useGeolocation from "./hooks/geolocation/useGeolocation.hooks";
 import Header from "./components/header/header.component";
 import CurrentWeather from "./components/current-weather/current-weather.component";
 import HourlyForecast from "./components/hourly-forecast/hourly-forecast.component";
+import CurrentWeatherDetails from "./components/current-weather-details/current-weather-details.component";
 
 const App = () => {
   const [units, setUnits] = useState("fahrenheit");
@@ -83,6 +84,7 @@ const App = () => {
         weatherData={weatherData}
       />
       <HourlyForecast weatherData={weatherData} />
+      <CurrentWeatherDetails weatherData={weatherData} />
     </div>
   );
 };

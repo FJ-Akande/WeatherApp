@@ -76,7 +76,7 @@ const parseDailyWeather = ({ daily: dailyData }) => {
     weatherCode: dailyData.weather_code[index],
     maxTemperature: Math.round(dailyData.temperature_2m_max[index]),
     minTemperature: Math.round(dailyData.temperature_2m_min[index]),
-    uvIndexMax: Math.round(dailyData.uv_index_max[0]),
+    uvIndexMax: Math.round(dailyData.uv_index_max[index]),
   }));
   return dailyWeather;
 };
