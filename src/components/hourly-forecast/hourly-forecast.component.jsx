@@ -1,5 +1,5 @@
 import React from "react";
-import ForecastCard from "../forecast-card/forecast-card.component";
+import ForecastCard from "../hourly-forecast-card/forecast-card.component";
 
 const HourlyForecast = ({ weatherData }) => {
   return (

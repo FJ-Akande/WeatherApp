@@ -6,6 +6,7 @@ import Header from "./components/header/header.component";
 import CurrentWeather from "./components/current-weather/current-weather.component";
 import HourlyForecast from "./components/hourly-forecast/hourly-forecast.component";
 import CurrentWeatherDetails from "./components/current-weather-details/current-weather-details.component";
+import DailyWeather from "./components/daily-weather/daily-weather.component";
 
 const App = () => {
   const [units, setUnits] = useState("fahrenheit");
@@ -46,7 +47,6 @@ const App = () => {
             city: searchedLocation.searchedRadar,
           });
           setWeatherData(data);
-          console.log("changed from fetching searched location data");
         })
         .catch((error) => {
           console.error("Error fetching searched weather data:", error);
@@ -85,6 +85,7 @@ const App = () => {
       />
       <HourlyForecast weatherData={weatherData} />
       <CurrentWeatherDetails weatherData={weatherData} />
+      <DailyWeather weatherData={weatherData} />
     </div>
   );
 };
