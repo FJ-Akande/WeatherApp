@@ -1,0 +1,15 @@
+footer {
+    background: #202B3B;
+    border-radius: 20px;
+    color: #78818f;
+    margin-top: 10px;
+}
+
+.conditions-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.conditions-grid-container h3 {
+    margin: 0;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import useDebounce from "../../../hooks/debounce/debounce.hooks";
+import useDebounce from "../../hooks/debounce/debounce.hooks";
+import "../searchbox/searchbox.styles.css";
 
 const SearchBox = ({ units, setSearchedLocation }) => {
   const [query, setQuery] = useState("");
@@ -24,12 +25,14 @@ const SearchBox = ({ units, setSearchedLocation }) => {
   }, [debouncedSearch]);
 
   return (
-    <div>
+    <div className="search-box">
       <input
         type="text"
         placeholder="Search city..."
         value={query}
-        onChange={(event) => setQuery(event.target.value)}
+        onChange={(event) => {
+          setQuery(event.target.value);
+        }}
       />
     </div>
   );

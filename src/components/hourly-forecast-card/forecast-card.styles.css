@@ -1,0 +1,30 @@
+.forecast-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.forecast-card {
+    padding: 0 2em;
+    border-right: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forecast-card:last-child {
+    border-right: none;
+}
+
+.forecast-card h2,
+h4 {
+    margin: 0;
+}
+
+.forecast-card img {
+    width: 48px;
+    height: 38.39px;
+    margin: 8px auto;
+}

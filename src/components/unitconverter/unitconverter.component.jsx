@@ -1,5 +1,5 @@
 import React from "react";
-import getWeather from "../../../services/weather/weather.services";
+import "../unitconverter/unitconverter.styles.css";
 
 const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {
   const { latitude, longitude } = setDefaultLocation;
@@ -15,10 +15,18 @@ const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {
   return (
     <div>
       <div className="convert-btns">
-        <button type="button" onClick={handleCelsuisUnitChange}>
+        <button
+          className="celsius-btn"
+          type="button"
+          onClick={handleCelsuisUnitChange}
+        >
           &deg;C
         </button>
-        <button type="button" onClick={handleFahrenUnitChange}>
+        <button
+          className="fahrenheit-btn"
+          type="button"
+          onClick={handleFahrenUnitChange}
+        >
           &deg;F
         </button>
       </div>

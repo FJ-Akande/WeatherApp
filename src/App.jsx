@@ -79,13 +79,17 @@ const App = () => {
         setDefaultLocation={setDefaultLocation}
         setSearchedLocation={setSearchedLocation}
       />
-      <CurrentWeather
-        defaultLocation={defaultLocation}
-        weatherData={weatherData}
-      />
-      <HourlyForecast weatherData={weatherData} />
-      <CurrentWeatherDetails weatherData={weatherData} />
-      <DailyWeather weatherData={weatherData} />
+      <div className="hero-sidebar-wrapper">
+        <section className="hero-section">
+          <CurrentWeather
+            defaultLocation={defaultLocation}
+            weatherData={weatherData}
+          />
+          <HourlyForecast weatherData={weatherData} />
+          <CurrentWeatherDetails weatherData={weatherData} />
+        </section>
+        <DailyWeather weatherData={weatherData} />
+      </div>
     </div>
   );
 };

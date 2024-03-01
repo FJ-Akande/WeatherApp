@@ -1,0 +1,26 @@
+.convert-btns {
+    display: flex;
+}
+
+.convert-btns button {
+    cursor: pointer;
+}
+
+.convert-btns .celsius-btn {
+    background: #202B3B;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.convert-btns .fahrenheit-btn {
+    background: #fff;
+    color: #202B3B;
+    border-radius: 50%;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    margin-left: 5px;
+}

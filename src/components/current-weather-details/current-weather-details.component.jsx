@@ -1,4 +1,5 @@
 import React from "react";
+import "./current-details.styles.css";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import AirIcon from "@mui/icons-material/Air";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";

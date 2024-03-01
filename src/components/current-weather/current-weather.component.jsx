@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./current-weather.styles.css";
 import { ICON_MAP } from "../../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
 import cloudIcon from "../../assets/weather-icons/cloud.svg";
@@ -56,15 +57,13 @@ const CurrentWeather = ({ defaultLocation, weatherData }) => {
     <>
       <div className="current-weather-container">
         <div className="current-container">
-          <div>
-            <h2>{city}</h2>
-            <p>Chance of rain: {precipitation}%</p>
-            <h1>{temperature}&deg;</h1>
-            {iconPath && (
-              <img src={iconPath} alt="Weather Icon" className="icon-img" />
-            )}
-          </div>
+          <h2>{city}</h2>
+          <p>Chance of rain: {precipitation}%</p>
+          <h1>{temperature}&deg;</h1>
         </div>
+        {iconPath && (
+          <img src={iconPath} alt="Weather Icon" className="current-icon-img" />
+        )}
       </div>
     </>
   );

@@ -44,7 +44,7 @@ const DailyWeather = ({ weatherData: { daily } }) => {
   };
 
   return (
-    <article>
+    <section>
       <div>
         <h3>7-DAY FORECAST</h3>
         {daily.map((day) => (
@@ -66,7 +66,7 @@ const DailyWeather = ({ weatherData: { daily } }) => {
           </div>
         ))}
       </div>
-    </article>
+    </section>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
-import SearchBox from "./searchbox/searchbox.component";
-import UnitConverter from "./unitconverter/unitconverter.component";
+import SearchBox from "../searchbox/searchbox.component";
+import UnitConverter from "../unitconverter/unitconverter.component";
+import "./header.styles.css";
 
 const Header = ({
   units,

@@ -1,0 +1,11 @@
+.hourly-forecast-container {
+    background: #202B3B;
+    border-radius: 20px;
+    color: #78818f;
+    padding: 4px 0 10px 0;
+}
+
+.hourly-forecast-container h3 {
+    font-size: 0.8em;
+    text-align: center;
+}

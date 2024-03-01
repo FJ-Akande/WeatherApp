@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./forecast-card.styles.css";
 import { ICON_MAP } from "../../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
 import cloudIcon from "../../assets/weather-icons/cloud.svg";
@@ -36,9 +37,9 @@ const ForecastCard = ({ weatherData: { hourly } }) => {
   };
 
   return (
-    <div>
+    <div className="forecast-card-container">
       {hourly.map((hour, index) => (
-        <div key={index}>
+        <div key={index} className="forecast-card">
           <h4>{HOUR_FORMATTER.format(hour.timestamp)}</h4>
           {getIconPath(hour.weatherCode) && (
             <img
@@ -47,7 +48,7 @@ const ForecastCard = ({ weatherData: { hourly } }) => {
               className="icon-img"
             />
           )}
-          <h2>{hour.temperature}</h2>
+          <h2>{hour.temperature}&deg;</h2>
         </div>
       ))}
     </div>
