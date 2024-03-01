@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ICON_MAP } from "../utils/iconmap/iconMap.utils";
+import { ICON_MAP } from "../../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
 import cloudIcon from "../../assets/weather-icons/cloud.svg";
 import cloudBoltIcon from "../../assets/weather-icons/cloud-bolt.svg";

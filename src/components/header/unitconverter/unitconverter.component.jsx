@@ -2,33 +2,23 @@ import React from "react";
 import getWeather from "../../../services/weather/weather.services";
 
 const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {
-  //Come back to these:
+  const { latitude, longitude } = setDefaultLocation;
 
-  //   const { latitude, longitude } = setDefaultLocation;
+  const handleCelsuisUnitChange = () => {
+    setUnits("celsius");
+  };
 
-  //   const handleCelsuisUnitChange = () => {
-  //     setUnits("celsuis");
-  //     getWeather(latitude, longitude, units);
-  //   };
-
-  //   const handleFahrenUnitChange = () => {
-  //     setUnits("fahrenheit");
-  //     getWeather(latitude, longitude, units);
-  //   };
+  const handleFahrenUnitChange = () => {
+    setUnits("fahrenheit");
+  };
 
   return (
     <div>
       <div className="convert-btns">
-        <button
-          type="button"
-          //   onClick={handleCelsuisUnitChange}
-        >
+        <button type="button" onClick={handleCelsuisUnitChange}>
           &deg;C
         </button>
-        <button
-          type="button"
-          //   onClick={handleFahrenUnitChange}
-        >
+        <button type="button" onClick={handleFahrenUnitChange}>
           &deg;F
         </button>
       </div>
