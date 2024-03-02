@@ -33,3 +33,9 @@
     width: 48px;
     height: 51px;
 }
+
+@media screen and (max-width: 1060px) {
+    .daily-section-container {
+        margin-right: 0;
+    }
+}

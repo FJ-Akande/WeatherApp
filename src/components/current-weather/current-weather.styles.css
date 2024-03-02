@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 16px 30px;
 }
 
@@ -25,4 +27,14 @@
     margin-top: 5px;
     font-weight: 300;
     color: #78818f;
+}
+
+@media screen and (max-width: 730px) {
+    .current-weather-container {
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: space-between;
+        align-items: start;
+        flex-wrap: wrap;
+    }
 }

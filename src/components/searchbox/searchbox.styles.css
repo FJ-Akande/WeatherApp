@@ -16,3 +16,9 @@
 .search-box input:focus {
     outline: none;
 }
+
+@media screen and (max-width: 1060px) {
+    .search-box input {
+        width: 95%;
+    }
+}
