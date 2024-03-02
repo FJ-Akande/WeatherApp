@@ -11,7 +11,7 @@ const CurrentWeatherDetails = ({ weatherData }) => {
 
   return (
     <footer>
-      <h3>AIR CONDITIONS</h3>
+      <h3 className="footer-header-text">AIR CONDITIONS</h3>
       <div className="conditions-grid-container">
         <div>
           <h3>
@@ -25,7 +25,7 @@ const CurrentWeatherDetails = ({ weatherData }) => {
         <div>
           <h3>
             <span>
-              <AirIcon />
+              <WaterDropIcon />
             </span>
             Chance of rain
           </h3>
@@ -34,7 +34,7 @@ const CurrentWeatherDetails = ({ weatherData }) => {
         <div>
           <h3>
             <span>
-              <WaterDropIcon />
+              <AirIcon />
             </span>
             Wind
           </h3>

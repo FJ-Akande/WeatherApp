@@ -2,7 +2,7 @@
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 1%;
     font-family: "Roboto", sans-serif;
     background: #0B131E;
     color: #fff;
@@ -15,5 +15,5 @@ body {
 .hero-sidebar-wrapper {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
+    grid-gap: 60px;
 }

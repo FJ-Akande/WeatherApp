@@ -1,0 +1,35 @@
+.daily-section-container {
+    background: #202B3B;
+    border-radius: 20px;
+    margin-right: 18px;
+    margin-top: 10px;
+    padding: 1em;
+    color: #78818f;
+}
+
+.daily-section-container h3 {
+    font-size: 0.8em;
+}
+
+.daily-section-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.daily-section-container td {
+    border-bottom: 1px solid #78818f;
+    padding: 4px;
+}
+
+.daily-section-container td:not(:last-child) {
+    padding-right: 10px;
+}
+
+.daily-section-container tr:last-child td {
+    border-bottom: none;
+}
+
+.daily-section-container img {
+    width: 48px;
+    height: 51px;
+}
