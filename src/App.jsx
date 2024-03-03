@@ -72,7 +72,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="body-container">
       <Header
         units={units}
         setUnits={setUnits}

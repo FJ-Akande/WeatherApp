@@ -1,5 +1,6 @@
 .search-box {
     width: 100%;
+    display: flex;
 }
 
 .search-box input {
@@ -19,6 +20,7 @@
 
 @media screen and (max-width: 1060px) {
     .search-box input {
-        width: 95%;
+        flex: 1;
+        margin-right: 20px;
     }
 }

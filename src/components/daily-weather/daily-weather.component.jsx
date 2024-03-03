@@ -49,50 +49,6 @@ const DailyWeather = ({ weatherData: { daily } }) => {
   return (
     <section className="daily-section-container">
       <h3>7-DAY FORECAST</h3>
-      {/* {daily.map((day) => (
-        <div key={day.date} className="daily-flex-container">
-          <p>{DAY_FORMATTER.format(day.date)}</p>
-          {getIconPath(day.weatherCode) && (
-            <>
-              <img
-                src={getIconPath(day.weatherCode).iconPath}
-                alt="Weather Icon"
-                className="icon-img"
-              />
-              <p>{getIconPath(day.weatherCode).iconName}</p>
-            </>
-          )}
-          <p>
-            {day.maxTemperature}/{day.minTemperature}
-          </p>
-        </div>
-      ))} */}
-      {/* <table>
-        <tbody>
-          {daily.map((day) => (
-            <tr key={day.date}>
-              <td>{DAY_FORMATTER.format(day.date)}</td>
-              <td>
-                {getIconPath(day.weatherCode) && (
-                  <img
-                    src={getIconPath(day.weatherCode).iconPath}
-                    alt="Weather Icon"
-                    className="icon-img"
-                  />
-                )}
-              </td>
-              <td>
-                {getIconPath(day.weatherCode) && (
-                  <p>{getIconPath(day.weatherCode).iconName}</p>
-                )}
-              </td>
-              <td>
-                {day.maxTemperature}/{day.minTemperature}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
       <table>
         <tbody>
           {daily.map((day, index) => (

@@ -29,6 +29,9 @@ h4 {
     margin: 8px auto;
 }
 
+/* @media screen and (max-width: 322px) {
+} */
+
 @media screen and (max-width: 510px) {
     .forecast-card:nth-child(3) {
         border-right: none;
@@ -56,12 +59,6 @@ h4 {
         border-right: none;
     }
 }
-
-/* @media screen and (max-width: 540px) and (min-width: 726px) {
-    .forecast-card:last-child {
-        border-right: 1px solid #78818f;
-    }
-} */
 
 @media screen and (max-width: 726px) {
     .forecast-card:nth-child(6) {

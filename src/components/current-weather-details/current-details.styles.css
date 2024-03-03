@@ -3,7 +3,11 @@ footer {
     border-radius: 20px;
     color: #78818f;
     margin-top: 20px;
-    padding: 4px 0 20px 4.8em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-header-text {
@@ -12,10 +16,17 @@ footer {
 }
 
 .conditions-grid-container {
-    display: grid;
-    /* grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); */
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-    grid-row-gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 620px;
+    width: 100%;
+}
+
+.conditions-grid-container>div {
+    width: calc(50% - 15px);
+    margin-bottom: 20px;
 }
 
 .conditions-grid-container h3 {
@@ -33,4 +44,22 @@ footer {
     color: #d3dbe9;
     margin: 10px 0 0 0;
     font-size: 1em;
+}
+
+@media screen and (max-width: 490px) {
+    .conditions-grid-container>div {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .conditions-grid-container {
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .conditions-grid-container {
+        max-width: 400px;
+    }
 }

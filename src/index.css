@@ -17,6 +17,7 @@ body {
     grid-template-columns: 2fr 1fr;
     grid-gap: 60px;
     margin-top: 30px;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 1060px) {
