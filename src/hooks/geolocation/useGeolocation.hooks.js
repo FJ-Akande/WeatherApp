@@ -15,7 +15,7 @@ const useGeolocation = () => {
               const { latitude, longitude } = position.coords;
 
               // Use reverse geocoding to get the city name
-              const reverseGeocodingUrl = `https://geocode.xyz/${latitude},${longitude}?json=1`;
+              const reverseGeocodingUrl = `https://geocode.xyz/${latitude},${longitude}?json=1&auth=377704178113329620849x13998`;
               const reverseGeocodingResponse = await fetch(reverseGeocodingUrl);
               const reverseGeocodingData =
                 await reverseGeocodingResponse.json();
