@@ -1,4 +1,3 @@
-import React from "react";
 import "../unitconverter/unitconverter.styles.css";
 
 const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {

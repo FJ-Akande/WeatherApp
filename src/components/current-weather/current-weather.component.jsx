@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./current-weather.styles.css";
+import { useEffect, useState, useContext } from "react";
+import { WeatherDataContext } from "../contexts/weather-data-contexts";
 import { ICON_MAP } from "../../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
 import cloudIcon from "../../assets/weather-icons/cloud.svg";
@@ -8,8 +8,10 @@ import cloudShowersIcon from "../../assets/weather-icons/cloud-showers-heavy.svg
 import cloudSunIcon from "../../assets/weather-icons/cloud-sun.svg";
 import smogIcon from "../../assets/weather-icons/smog.svg";
 import snowFlakeIcon from "../../assets/weather-icons/snowflake.svg";
+import "./current-weather.styles.css";
 
-const CurrentWeather = ({ defaultLocation, weatherData }) => {
+const CurrentWeather = ({ defaultLocation }) => {
+  const { weatherData } = useContext(WeatherDataContext);
   const [iconFileName, setIconFileName] = useState("");
   const [iconPath, setIconPath] = useState("");
   const { city } = defaultLocation;

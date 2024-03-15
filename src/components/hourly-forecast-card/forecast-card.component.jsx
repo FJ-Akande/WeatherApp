@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { WeatherDataContext } from "../contexts/weather-data-contexts";
 import "./forecast-card.styles.css";
 import { ICON_MAP } from "../../utils/iconmap/iconMap.utils";
 import sunIcon from "../../assets/weather-icons/sun.svg";
@@ -9,7 +10,11 @@ import cloudSunIcon from "../../assets/weather-icons/cloud-sun.svg";
 import smogIcon from "../../assets/weather-icons/smog.svg";
 import snowFlakeIcon from "../../assets/weather-icons/snowflake.svg";
 
-const ForecastCard = ({ weatherData: { hourly } }) => {
+const ForecastCard = () => {
+  const {
+    weatherData: { hourly },
+  } = useContext(WeatherDataContext);
+
   const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {
     hour: "numeric",
   });

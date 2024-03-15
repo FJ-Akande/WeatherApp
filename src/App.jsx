@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import { useEffect, useState, useContext } from "react";
 import getWeather from "./services/weather/weather.services";
 import useGeolocation from "./hooks/geolocation/useGeolocation.hooks";
+import { WeatherDataContext } from "./components/contexts/weather-data-contexts";
 import Header from "./components/header/header.component";
 import CurrentWeather from "./components/current-weather/current-weather.component";
 import HourlyForecast from "./components/hourly-forecast/hourly-forecast.component";
 import CurrentWeatherDetails from "./components/current-weather-details/current-weather-details.component";
 import DailyWeather from "./components/daily-weather/daily-weather.component";
+import "./App.css";
 
 const App = () => {
+  const { weatherData, setWeatherData } = useContext(WeatherDataContext);
   const [units, setUnits] = useState("fahrenheit");
   const { location, city, locationAvailable } = useGeolocation();
   const [defaultLocation, setDefaultLocation] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState(null);
 
   useEffect(() => {
@@ -81,14 +82,11 @@ const App = () => {
       />
       <div className="hero-sidebar-wrapper">
         <section className="hero-section">
-          <CurrentWeather
-            defaultLocation={defaultLocation}
-            weatherData={weatherData}
-          />
-          <HourlyForecast weatherData={weatherData} />
-          <CurrentWeatherDetails weatherData={weatherData} />
+          <CurrentWeather defaultLocation={defaultLocation} />
+          <HourlyForecast />
+          <CurrentWeatherDetails />
         </section>
-        <DailyWeather weatherData={weatherData} />
+        <DailyWeather />
       </div>
     </div>
   );

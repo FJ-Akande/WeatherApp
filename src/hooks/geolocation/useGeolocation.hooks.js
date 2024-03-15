@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-//Projectid - weatherapp-415114
 const useGeolocation = () => {
   const [location, setLocation] = useState(null);
   const [city, setCity] = useState("");

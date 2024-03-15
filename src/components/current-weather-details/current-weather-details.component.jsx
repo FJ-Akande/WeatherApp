@@ -1,11 +1,14 @@
-import React from "react";
+import { useContext } from "react";
+import { WeatherDataContext } from "../contexts/weather-data-contexts";
 import "./current-details.styles.css";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import AirIcon from "@mui/icons-material/Air";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 
-const CurrentWeatherDetails = ({ weatherData }) => {
+const CurrentWeatherDetails = () => {
+  const { weatherData } = useContext(WeatherDataContext);
+
   const { current, daily } = weatherData;
   const { uvIndexMax } = daily[0];
 
