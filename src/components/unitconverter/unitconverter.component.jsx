@@ -1,7 +1,9 @@
+import { useContext } from "react";
+import { WeatherDataContext } from "../contexts/weather-data-contexts";
 import "../unitconverter/unitconverter.styles.css";
 
-const UnitConverter = ({ units, setUnits, setDefaultLocation }) => {
-  const { latitude, longitude } = setDefaultLocation;
+const UnitConverter = () => {
+  const { setUnits } = useContext(WeatherDataContext);
 
   const handleCelsuisUnitChange = () => {
     setUnits("celsius");

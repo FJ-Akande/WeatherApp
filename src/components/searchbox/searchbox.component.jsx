@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { WeatherDataContext } from "../contexts/weather-data-contexts";
 import useDebounce from "../../hooks/debounce/debounce.hooks";
 import "../searchbox/searchbox.styles.css";
 
-const SearchBox = ({ units, setSearchedLocation }) => {
+const SearchBox = () => {
+  const { setSearchedLocation } = useContext(WeatherDataContext);
   const [query, setQuery] = useState("");
   const debouncedSearch = useDebounce(query);
 
